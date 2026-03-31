@@ -34,7 +34,6 @@ xcode-select --install
 ```sh
 git clone https://github.com/brennancheung/heic2jpg.git
 cd heic2jpg
-chmod +x install.sh uninstall.sh
 ./install.sh
 ```
 
