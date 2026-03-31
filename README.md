@@ -70,6 +70,10 @@ The entire program is a single Swift file. It creates an `FSEventStream` with th
 
 The `launchd` agent is configured with `KeepAlive: true`, so macOS will restart the daemon if it ever crashes, and `RunAtLoad: true` so it starts on login.
 
+## LLM install
+
+> Clone https://github.com/brennancheung/heic2jpg.git, then run `./install.sh`. If `swiftc` is not available, run `xcode-select --install` first. After installing, verify the daemon is running with `launchctl list | grep heic2jpg`.
+
 ## License
 
 MIT
