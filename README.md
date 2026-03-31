@@ -38,13 +38,15 @@ chmod +x install.sh uninstall.sh
 ./install.sh
 ```
 
-This compiles the Swift source, installs the binary to `~/.local/bin/`, and registers a `launchd` agent that starts automatically on login.
+This compiles the Swift source, creates an app bundle at `~/Applications/heic2jpg.app`, and registers a `launchd` agent that starts automatically on login.
 
 By default it watches `~/Desktop` and `~/Downloads`. To watch different directories:
 
 ```sh
 ./install.sh ~/Pictures ~/Documents ~/Desktop
 ```
+
+You can also add and remove folders from the menu bar icon after installation.
 
 ## Uninstall
 
@@ -68,16 +70,6 @@ Converted: /Users/you/Desktop/IMG_1234.heic → /Users/you/Desktop/IMG_1234.jpg
 The entire program is a single Swift file. It creates an `FSEventStream` with the `kFSEventStreamCreateFlagFileEvents` flag, which provides file-level (not directory-level) notifications from the kernel. The callback checks if the event path ends in `.heic`, verifies the file exists and has a non-zero size (to skip in-progress writes), then converts it using `ImageIO` (`CGImageSource` → `CGImageDestination`) entirely in-process — no subprocess spawning, no CLI tools. EXIF metadata is read from the source and written to the JPEG. The stream is scheduled on a GCD dispatch queue — no run loop, no polling, no periodic scanning.
 
 The `launchd` agent is configured with `KeepAlive: true`, so macOS will restart the daemon if it ever crashes, and `RunAtLoad: true` so it starts on login.
-
-## LLM setup prompt
-
-If you're using an AI coding assistant (Claude Code, Cursor, Copilot, etc.), you can paste the following prompt to have it install heic2jpg on your system:
-
-> Clone https://github.com/brennancheung/heic2jpg.git into my code directory. Read the README, then run the install script. If I don't have Xcode Command Line Tools installed, install them first. After installing, verify the daemon is running with `launchctl list | grep heic2jpg`.
-
-Or, if you want the LLM to build it from source without cloning:
-
-> Read the file `heic2jpg.swift` in this repo. Compile it with `swiftc -O -o ~/.local/bin/heic2jpg heic2jpg.swift`. Then create a launchd plist at `~/Library/LaunchAgents/com.heic2jpg.agent.plist` that runs the binary with `KeepAlive` and `RunAtLoad` set to true, with `StandardErrorPath` set to `/tmp/heic2jpg.log`. Load it with `launchctl load`. The binary accepts optional directory paths as arguments — default is ~/Desktop and ~/Downloads.
 
 ## License
 
