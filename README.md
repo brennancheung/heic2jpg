@@ -32,7 +32,7 @@ xcode-select --install
 ## Install
 
 ```sh
-git clone https://github.com/yourusername/heic2jpg.git
+git clone https://github.com/brennancheung/heic2jpg.git
 cd heic2jpg
 chmod +x install.sh uninstall.sh
 ./install.sh
@@ -73,7 +73,7 @@ The `launchd` agent is configured with `KeepAlive: true`, so macOS will restart 
 
 If you're using an AI coding assistant (Claude Code, Cursor, Copilot, etc.), you can paste the following prompt to have it install heic2jpg on your system:
 
-> Clone https://github.com/yourusername/heic2jpg.git into my code directory. Read the README, then run the install script. If I don't have Xcode Command Line Tools installed, install them first. After installing, verify the daemon is running with `launchctl list | grep heic2jpg`.
+> Clone https://github.com/brennancheung/heic2jpg.git into my code directory. Read the README, then run the install script. If I don't have Xcode Command Line Tools installed, install them first. After installing, verify the daemon is running with `launchctl list | grep heic2jpg`.
 
 Or, if you want the LLM to build it from source without cloning:
 
