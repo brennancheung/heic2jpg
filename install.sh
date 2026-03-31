@@ -42,8 +42,9 @@ else
     DIRS=("$HOME/Desktop" "$HOME/Downloads")
 fi
 
-# Generate ProgramArguments XML
-ARGS_XML="		<string>$BINARY_PATH</string>"
+# Generate ProgramArguments XML (--quiet suppresses settings window on auto-start)
+ARGS_XML="		<string>$BINARY_PATH</string>
+		<string>--quiet</string>"
 for dir in "${DIRS[@]}"; do
     ARGS_XML="$ARGS_XML
 		<string>$dir</string>"
